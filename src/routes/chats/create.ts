@@ -13,7 +13,7 @@ const createChatSchema = z.object({
 });
 
 export const post = [
-	// authenticateRequest(),
+	authenticateRequest(),
 	validateSchema(createChatSchema),
 	async (req: Request, res: Response) => {
 		try {
@@ -22,9 +22,13 @@ export const post = [
 			// 	return res.status(401).json({ error: "Not Valid User", result: null });
 			// }
 			const { projectId, message, title } = req.body;
+			const userId = req.userId;
+			if (!userId) {
+				return res.status(401).json({ error: "Not Valid User", result: null });
+			}
 			// Ensure project exists and belongs to the user
 			const project = await prisma.project.findFirst({
-				where: { id: projectId, authorId: 1 },
+				where: { id: projectId, authorId: userId },
 			});
 			if (!project) {
 				return res
@@ -41,7 +45,7 @@ export const post = [
 			// Create the chat
 			const chat = await prisma.chat.create({
 				data: {
-					authorId: 1,
+					authorId: userId,
 					projectId,
 					title: title ?? "Untitled Chat",
 					chatHistory: initialChatHistory,
@@ -51,7 +55,7 @@ export const post = [
 				},
 			});
 			// immediately start generating chat asynchronously
-			processChat({ chatId: chat.id, authorId: 1 });
+			processChat({ chatId: chat.id, authorId: userId });
 			// Return created chat
 			return res.status(201).json({ error: null, result: chat });
 		} catch (error) {

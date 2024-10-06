@@ -20,6 +20,9 @@ export const post = [
 		try {
 			const { password, apiKey } = req.body;
 			const userId = req.userId;
+			if (!userId) {
+				return res.status(401).json({ error: "Not Valid User", result: null });
+			}
 			if (!password && !apiKey) {
 				return res.status(400).json({ error: "No fields to update" });
 			}
@@ -47,7 +50,6 @@ export const post = [
 					iv: iv.toString("hex"),
 					encrypted,
 				};
-				console.log({ openAIKey });
 				await prisma.user.update({
 					where: {
 						id: userId,

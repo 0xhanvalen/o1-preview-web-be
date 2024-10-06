@@ -9,17 +9,17 @@ const createProjectSchema = z.object({
 });
 
 export const post = [
-	// authenticateRequest(),
+	authenticateRequest(),
 	validateSchema(createProjectSchema),
 	async (req: Request, res: Response) => {
 		try {
-			// const userId = req.userId;
-			// if (!userId) {
-			// 	return res.status(401).json({ error: "Not Valid User", result: null });
-			// }
+			const userId = req.userId;
+			if (!userId) {
+				return res.status(401).json({ error: "Not Valid User", result: null });
+			}
 			const newProject = await prisma.project.create({
 				data: {
-					authorId: 1,
+					authorId: userId,
 					name: req.body.name,
 				},
 			});
