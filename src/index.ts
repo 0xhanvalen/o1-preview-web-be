@@ -6,15 +6,22 @@ import cookieParser from "cookie-parser";
 import { WSS } from "./lib/ws";
 import http from "http";
 import createRouter from "express-file-routing";
+import dotenv from "dotenv";
+dotenv.config();
 
 (async () => {
 	const app: Express = express();
 	const port = PORT || 3001;
 
+	const origin =
+		process.env.ENVIRONMENt === "production"
+			? "https://o1-playground.mackenziebowes.com"
+			: "http://localhost:3000";
+
 	app.use(
 		cors({
-			origin: "http://localhost:3000", // replace with your frontend origin
-			credentials: true, // allow credentials
+			origin,
+			credentials: true,
 		})
 	);
 	app.use(express.json());
@@ -43,6 +50,6 @@ import createRouter from "express-file-routing";
 	});
 
 	server.listen(port, () => {
-		console.log(`[server]: Server is running at http://localhost:${port}`);
+		console.log(`[server]: Server is running at ${port}`);
 	});
 })();
