@@ -1,4 +1,3 @@
-import openai from "../openai";
 import prisma from "@/lib/prisma";
 import OpenAI from "openai";
 import { ChatMessage } from "@/utils/types/chat";
