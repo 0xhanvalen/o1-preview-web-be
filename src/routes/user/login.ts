@@ -15,12 +15,12 @@ export const post = [
 	async (req: Request, res: Response) => {
 		try {
 			console.log("Logging In...");
-			const cookies = req.cookies;
-			console.log({ cookies });
+			const { email, password } = req.body;
+			console.log({ email, password });
 			// find user by email before checking password
 			const user = await prisma.user.findFirst({
 				where: {
-					email: { equals: req.body.email, mode: "insensitive" },
+					email: { equals: email, mode: "insensitive" },
 				},
 			});
 			if (!user) {
@@ -45,13 +45,15 @@ export const post = [
 			// Set tokens as HttpOnly cookies
 			res.cookie("httpToken", tokens.httpToken, {
 				httpOnly: true,
-				secure: true, // Set to true if using HTTPS
+				secure: process.env.NODE_ENV === "production",
+				sameSite: "lax",
 				maxAge: SEVEN_DAYS, // 1 hour in milliseconds
 			});
 
 			res.cookie("wsToken", tokens.wsToken, {
 				httpOnly: true,
-				secure: true,
+				secure: process.env.NODE_ENV === "production",
+				sameSite: "lax",
 				maxAge: SEVEN_DAYS,
 			});
 			console.log("Logged In!");

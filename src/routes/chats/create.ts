@@ -17,10 +17,6 @@ export const post = [
 	validateSchema(createChatSchema),
 	async (req: Request, res: Response) => {
 		try {
-			// const userId = req.userId;
-			// if (!userId) {
-			// 	return res.status(401).json({ error: "Not Valid User", result: null });
-			// }
 			const { projectId, message, title } = req.body;
 			const userId = req.userId;
 			if (!userId) {

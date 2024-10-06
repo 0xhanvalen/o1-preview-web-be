@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import authenticateRequest from "@/middlewares/authenticateRequest";
 
 export const get = [
-	authenticateRequest(),
+	// authenticateRequest(),
 	async (req: Request, res: Response) => {
 		res.clearCookie("httpToken", {
 			httpOnly: true,

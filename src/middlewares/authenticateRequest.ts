@@ -11,10 +11,14 @@ export default (
 		}
 	) =>
 	async (req: Request, res: Response, next: NextFunction) => {
+		console.log("Authenticating Request...");
+		const cookies = req.cookies;
+		console.log({ cookies });
 		const httpToken = req.cookies["httpToken"];
 
 		if (httpToken) {
 			const userId = verifyToken(httpToken, "http");
+			console.log({ userId });
 			if (userId) {
 				req.userId = userId;
 			}
@@ -22,7 +26,7 @@ export default (
 
 		if (!req.userId && !noRedirect) {
 			console.error("Error: Not Signed In");
-			return res.status(401).json({ error: "Not Signed In" });
+			return res.status(401).json({ error: "Not Signed In", results: null });
 		}
 
 		next();
