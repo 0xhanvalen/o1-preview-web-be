@@ -1,0 +1,42 @@
+{
+	"name": "be",
+	"version": "1.0.0",
+	"main": "index.js",
+	"scripts": {
+		"dev": "tsx watch src",
+		"start": "prisma generate && tsx src",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "",
+	"license": "ISC",
+	"description": "",
+	"devDependencies": {
+		"@paralleldrive/cuid2": "^2.2.2",
+		"@types/cors": "^2.8.17",
+		"@types/express": "^5.0.0",
+		"@types/jsonwebtoken": "^9.0.7",
+		"@types/node": "^22.7.4",
+		"@types/ws": "^8.5.12",
+		"cors": "^2.8.5",
+		"express": "^4.21.0",
+		"jsonwebtoken": "^9.0.2",
+		"prisma": "^5.20.0",
+		"prisma-erd-generator": "^1.11.2",
+		"ts-node": "^10.9.2",
+		"tsx": "^4.19.1",
+		"typescript": "^5.6.2"
+	},
+	"dependencies": {
+		"@prisma/client": "^5.20.0",
+		"@types/cookie-parser": "^1.4.7",
+		"@types/nodemailer": "^6.4.16",
+		"argon2": "^0.41.1",
+		"cookie-parser": "^1.4.6",
+		"dotenv": "^16.4.5",
+		"express-file-routing": "^3.0.3",
+		"nodemailer": "^6.9.15",
+		"openai": "^4.66.1",
+		"ws": "^8.18.0",
+		"zod": "^3.23.8"
+	}
+}
