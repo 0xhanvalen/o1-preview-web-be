@@ -17,7 +17,7 @@ const port = PORT || 3001;
 
 	const origin =
 		process.env.ENVIRONMENT === "production"
-			? "https://o1playground.mackenziebowes.com/"
+			? "https://o1playground.mackenziebowes.com"
 			: "http://localhost:3000";
 
 	app.use(
