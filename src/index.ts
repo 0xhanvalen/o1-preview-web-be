@@ -15,7 +15,7 @@ dotenv.config();
 
 	const origin =
 		process.env.ENVIRONMENT === "production"
-			? "https://o1-playground.mackenziebowes.com"
+			? "https://o1-playground.mackenziebowes.com/"
 			: "http://localhost:3000";
 	app.use(
 		cors({
