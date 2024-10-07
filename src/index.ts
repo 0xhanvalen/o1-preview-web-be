@@ -17,6 +17,7 @@ dotenv.config();
 		process.env.ENVIRONMENT === "production"
 			? "https://o1playground.mackenziebowes.com/"
 			: "http://localhost:3000";
+
 	app.use(
 		cors({
 			origin,
@@ -49,7 +50,7 @@ dotenv.config();
 	});
 
 	server.listen(port, () => {
-		console.log({ ENVIRONMENT: process.env.ENVIRONMENT });
+		console.log({ ENVIRONMENT: process.env.ENVIRONMENT, origin });
 		console.log(`[server]: Server is running at ${port}`);
 	});
 })();
