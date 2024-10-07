@@ -14,7 +14,7 @@ dotenv.config();
 	const port = PORT || 3001;
 
 	const origin =
-		process.env.ENVIRONMENt === "production"
+		process.env.ENVIRONMENT === "production"
 			? "https://o1-playground.mackenziebowes.com"
 			: "http://localhost:3000";
 
