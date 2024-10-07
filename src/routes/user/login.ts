@@ -4,6 +4,8 @@ import argon2 from "argon2";
 import { z } from "zod";
 import { validateSchema } from "@/middlewares/validateSchema";
 import { generateTokens } from "@/lib/utils/Token";
+import dotenv from "dotenv";
+dotenv.config();
 
 const loginSchema = z.object({
 	email: z.string(),
@@ -45,14 +47,14 @@ export const post = [
 			// Set tokens as HttpOnly cookies
 			res.cookie("httpToken", tokens.httpToken, {
 				httpOnly: true,
-				secure: process.env.NODE_ENV === "production",
+				secure: process.env.ENVIRONMENT === "production",
 				sameSite: "lax",
 				maxAge: SEVEN_DAYS, // 1 hour in milliseconds
 			});
 
 			res.cookie("wsToken", tokens.wsToken, {
 				httpOnly: true,
-				secure: process.env.NODE_ENV === "production",
+				secure: process.env.ENVIRONMENT === "production",
 				sameSite: "lax",
 				maxAge: SEVEN_DAYS,
 			});
