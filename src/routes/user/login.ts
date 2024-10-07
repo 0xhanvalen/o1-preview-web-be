@@ -48,14 +48,14 @@ export const post = [
 			res.cookie("httpToken", tokens.httpToken, {
 				httpOnly: true,
 				secure: process.env.ENVIRONMENT === "production",
-				sameSite: process.env.ENVIRONMENT === "production" ? "none" : "lax",
+				sameSite: process.env.ENVIRONMENT === "production" ? "strict" : "lax",
 				maxAge: SEVEN_DAYS, // 1 hour in milliseconds
 			});
 
 			res.cookie("wsToken", tokens.wsToken, {
 				httpOnly: true,
 				secure: process.env.ENVIRONMENT === "production",
-				sameSite: process.env.ENVIRONMENT === "production" ? "none" : "lax",
+				sameSite: process.env.ENVIRONMENT === "production" ? "strict" : "lax",
 				maxAge: SEVEN_DAYS,
 			});
 			console.log("Logged In!");
