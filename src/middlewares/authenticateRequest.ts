@@ -12,9 +12,8 @@ export default (
 	) =>
 	async (req: Request, res: Response, next: NextFunction) => {
 		console.log("Authenticating Request...");
-		const cookies = req.cookies;
-		console.log({ cookies });
-		const httpToken = req.cookies["httpToken"];
+		// extract http token from bearer token
+		const httpToken = req.headers.authorization?.split("Bearer ").at(-1);
 
 		if (httpToken) {
 			const userId = verifyToken(httpToken, "http");
