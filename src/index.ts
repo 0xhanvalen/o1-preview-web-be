@@ -9,6 +9,8 @@ import createRouter from "express-file-routing";
 import dotenv from "dotenv";
 dotenv.config();
 
+const port = PORT || 3001;
+
 (async () => {
 	const app: Express = express();
 	const port = PORT || 3001;
